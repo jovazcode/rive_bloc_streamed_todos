@@ -56,6 +56,7 @@ final filteredTodos =
   () => ValueCubit([], build: (ref, args) {
     final filter = ref.watch(todoListFilter).state;
     final todos = ref.watch(todoListProvider).state;
+    print('<BUILD> filteredTodos: todos.length=${todos.length}');
 
     switch (filter) {
       case TodoListFilter.completed:
@@ -69,13 +70,6 @@ final filteredTodos =
 );
 
 class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onEvent(Bloc bloc, Object? event) {
-    print('<EVENT> [${bloc.runtimeType}] $event');
-    super.onEvent(bloc, event);
-    print(event);
-  }
-
   @override
   void onChange(BlocBase bloc, Change change) {
     print('<CHANGE> [${bloc.runtimeType}] $change');
@@ -142,6 +136,8 @@ class Home extends HookWidget {
     final newTodoController = useTextEditingController();
     return RiveBlocBuilder(builder: (context, ref, _) {
       final todos = ref.watch(filteredTodos);
+      print('DEBUG <RiverBlocBuilder> builder: BUILDING, '
+          'todos.length=${todos.length}');
       return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(

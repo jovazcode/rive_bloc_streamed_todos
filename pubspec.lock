@@ -562,10 +562,11 @@ packages:
   rive_bloc:
     dependency: "direct main"
     description:
-      path: "../../rive_bloc"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: rive_bloc
+      sha256: af746e48f12beb6436a959d0e00fe2422ee4f0d103b0e19e5c8457844a674f5e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   rxdart:
     dependency: transitive
     description:

@@ -14,14 +14,16 @@ final todoRepositoryProvider = RiveBlocProvider.finalValue<TodosRepository>(() {
   throw UnimplementedError();
 });
 
-final todoListStreamProvider = RiveBlocProvider.stream(() =>
-    StreamBloc((ref, args) => ref.read(todoRepositoryProvider).getTodos()));
+final todoListStreamProvider =
+    RiveBlocProvider.stream<StreamBloc<List<Todo>>, List<Todo>>(() =>
+        StreamBloc((ref, args) => ref.read(todoRepositoryProvider).getTodos()));
 
 /// Creates a [TodoListCubit] and initialise it with pre-defined values.
 ///
 /// We are using [StateProvider] here, because `List<Todo>` is a complex
 /// object, with advanced business logic like how to edit a todo.
-final todoListProvider = RiveBlocProvider.state(TodoListCubit.new);
+final todoListProvider =
+    RiveBlocProvider.state<TodoListCubit, List<Todo>>(TodoListCubit.new);
 
 /// A [Todo] List [ValueCubit].
 class TodoListCubit extends ValueCubit<List<Todo>> {
